@@ -2,49 +2,40 @@ package com.example.rxtest.presentation.dog_screen
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.rxtest.data.model.ComplexSearch
 import com.example.rxtest.data.repository.Repository
-import com.example.rxtest.model.retrofit.DescriptionFact
-import com.example.rxtest.model.retrofit.ImageDog
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.core.SingleObserver
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 
 class DogViewModel : ViewModel() {
-        lateinit var repository: Repository
+    lateinit var repository: Repository
 
-    private val imageList: MutableLiveData<Observable<ImageDog>> = MutableLiveData()
-    val descriptionList: MutableLiveData<Observable<DescriptionFact>> = MutableLiveData()
+    val searchList: MutableLiveData<ComplexSearch> = MutableLiveData()
 
-    fun getImageListObserver(): MutableLiveData<Observable<ImageDog>> {
-        return imageList
+    fun getSearchListObserver(): MutableLiveData<ComplexSearch> {
+        return searchList
     }
 
-    fun getDescriptionListObserver(): MutableLiveData<Observable<DescriptionFact>> {
-        return descriptionList
-    }
+    fun makeApiSearchObservable() {
 
-    fun makeApiDescriptionObservable() {
-
-        val apiInterfaceDescriptionDog = repository.getDescription()
+        val apiInterfaceComplexSearch = repository.getComplexSearch()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(getDescriptionListObserverRx())
+            .subscribe(getSearchListObserverRx())
     }
 
-    private fun getDescriptionListObserverRx(): Observer<DescriptionFact> {
-        return object : Observer<DescriptionFact> {
-            override fun onNext(desc: DescriptionFact) {
-                descriptionList.postValue(repository.getDescription())
-            }
+    private fun getSearchListObserverRx(): SingleObserver<ComplexSearch> {
+        return object : SingleObserver<ComplexSearch> {
 
             override fun onError(e: Throwable) {
-                descriptionList.postValue(null)
+                searchList.postValue(null)
             }
 
-            override fun onComplete() {
+            override fun onSuccess(t: ComplexSearch) {
+                searchList.postValue(t)
             }
 
             override fun onSubscribe(d: Disposable) {
