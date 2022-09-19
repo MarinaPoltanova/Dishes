@@ -7,10 +7,16 @@ import com.example.rxtest.data.repository.Repository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.SingleObserver
 import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.functions.Consumer
 import io.reactivex.rxjava3.schedulers.Schedulers
 
+//маркерный интерфейс - почитать
+//для UI слоя https://github.com/sockeqwe/AdapterDelegates
+interface UIAction
 
-class DogViewModel : ViewModel() {
+class UIClick(): UIAction
+
+abstract class DogViewModel : ViewModel(){
     lateinit var repository: Repository
 
     val searchList: MutableLiveData<ComplexSearch> = MutableLiveData()
