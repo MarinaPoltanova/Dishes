@@ -8,11 +8,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rxtest.R
-import kotlinx.android.synthetic.main.fragment_retrofit.view.*
 
-//отобразить интерфейс
 //будут кликабельные карточки, ко ViewModel  передать эти клики
-class RetrofitFragment : Fragment() {
+class ComplexSearchFragment : Fragment() {
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: ComplexSearchAdapter
 
@@ -26,14 +24,22 @@ class RetrofitFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val viewModel = ViewModelProvider(this).get(DogViewModel::class.java)
         val v = inflater.inflate(R.layout.fragment_retrofit, container, false)
-        recyclerView = v.retrofit_rv
-        adapter = ComplexSearchAdapter()
-        recyclerView.adapter = adapter
-        viewModel.makeApiSearchObservable()
 
         return v
     }
 
-}
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val viewModel = ViewModelProvider(this)[ComplexSearchViewModel::class.java]
+        recyclerView = view.findViewById(R.id.retrofit_rv)
+        adapter = ComplexSearchAdapter()
+        recyclerView.adapter = adapter
+
+        viewModel.makeApiSearchObservable()
+
+        viewModel.getSearchListObserver().observe(viewLifecycleOwner) { list ->
+            adapter.setList(list.results)
+        }
+    }}

@@ -1,12 +1,19 @@
 package com.example.rxtest.presentation.dog_screen
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.rxtest.R
 import com.example.rxtest.data.model.Result
-import kotlinx.android.synthetic.main.item_retrofit.view.*
+import com.example.rxtest.presentation.MainActivity
+import kotlinx.coroutines.NonDisposableHandle.parent
 import java.util.Collections.emptyList
 
 class ComplexSearchAdapter : RecyclerView.Adapter<ComplexSearchAdapter.RetrofitHolder>() {
@@ -14,8 +21,8 @@ class ComplexSearchAdapter : RecyclerView.Adapter<ComplexSearchAdapter.RetrofitH
     var listComplexSearch = emptyList<Result>()
 
     class RetrofitHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val imageCuisine = view.retrofit_image_item_id
-        val titleCuisine = view.retrofit_description_preview_item_id
+        var imageCuisine = view.findViewById<ImageView>(R.id.retrofit_image_item_id)
+        var titleCuisine = view.findViewById<TextView>(R.id.retrofit_title_item_id)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RetrofitHolder {
@@ -28,10 +35,13 @@ class ComplexSearchAdapter : RecyclerView.Adapter<ComplexSearchAdapter.RetrofitH
 
     override fun onBindViewHolder(holder: RetrofitHolder, position: Int) {
         //image
-//        holder.itemView.retrofit_image_item_id.setImageURI(uri = ) =
-//            listComplexSearch[position].image
+        Glide.with(holder.imageCuisine)
+            .load(listComplexSearch[position].image)
+            .placeholder(R.drawable.loading_image)
+            .into(holder.imageCuisine)
+
         //description
-        holder.itemView.retrofit_description_preview_item_id.text =
+        holder.titleCuisine.text =
             listComplexSearch[position].title
 
     }
@@ -41,11 +51,12 @@ class ComplexSearchAdapter : RecyclerView.Adapter<ComplexSearchAdapter.RetrofitH
     }
 
     //function for set list
-
-    fun setList( listResult: List<Result>) {
+    @SuppressLint("NotifyDataSetChanged")
+    fun setList(listResult: List<Result>) {
         listComplexSearch = listResult
         //if something change, Android notify us
         notifyDataSetChanged()
 
     }
 }
+
