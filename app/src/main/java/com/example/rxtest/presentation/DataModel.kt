@@ -1,5 +1,10 @@
-package com.example.rxtest.data
+package com.example.rxtest.presentation
 
-open class DataModel {
-    
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+
+open class DataModel : ViewModel() {
+    val cusineId: MutableLiveData<Int> by lazy {
+        MutableLiveData<Int>()
+    }
 }

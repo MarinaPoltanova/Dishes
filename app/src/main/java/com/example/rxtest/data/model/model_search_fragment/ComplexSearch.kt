@@ -1,4 +1,4 @@
-package com.example.rxtest.data.model
+package com.example.rxtest.data.model.model_search_fragment
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,8 +1,8 @@
-package com.example.rxtest.presentation.dog_screen
+package com.example.rxtest.presentation.list_food_screen
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.rxtest.data.model.ComplexSearch
+import com.example.rxtest.data.model.model_search_fragment.ComplexSearch
 import com.example.rxtest.data.repository.Repository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.SingleObserver
