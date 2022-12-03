@@ -3,7 +3,7 @@ package com.example.rxtest.presentation.detail_food_screen
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.rxtest.data.model.model_detail_fragment.RecipeInfo
-import com.example.rxtest.data.repository.Repository
+import com.example.rxtest.data.repository.RepositoryRecipe
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.SingleObserver
 import io.reactivex.rxjava3.disposables.Disposable
@@ -13,7 +13,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class DetailRecipeViewModel(
 ) : ViewModel() {
-    var repository = Repository()
+    var repository = RepositoryRecipe()
     var recipeDetail: MutableLiveData<RecipeInfo> = MutableLiveData()
     var recipeId: Int = -1
 

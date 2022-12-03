@@ -1,4 +1,4 @@
-package com.example.rxtest.data.api
+package com.example.rxtest.data.api.recipe
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

@@ -3,7 +3,7 @@ package com.example.rxtest.presentation.list_food_screen
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.rxtest.data.model.model_search_fragment.ComplexSearch
-import com.example.rxtest.data.repository.Repository
+import com.example.rxtest.data.repository.RepositoryRecipe
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.SingleObserver
 import io.reactivex.rxjava3.disposables.Disposable
@@ -16,7 +16,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 //class UIClick(): UIAction
 
 public class ComplexSearchViewModel : ViewModel(){
-     var repository= Repository()
+     var repository= RepositoryRecipe()
 
     var searchList: MutableLiveData<ComplexSearch> = MutableLiveData()
 
