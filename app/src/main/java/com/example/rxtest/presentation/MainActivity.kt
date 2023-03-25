@@ -11,16 +11,16 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
 
-//    lateinit var viewPager2: ViewPager2
-//    lateinit var tabLayout: TabLayout
+    lateinit var viewPager2: ViewPager2
+    lateinit var tabLayout: TabLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
 
-//        viewPager2 = findViewById(R.id.container)
-//        tabLayout = findViewById(R.id.tab_layout)
+        viewPager2 = findViewById(R.id.container)
+        tabLayout = findViewById(R.id.tab_layout)
 //
 //        val adapter = ViewPager2Adapter(this)
 //        viewPager2.adapter = adapter
@@ -44,19 +44,16 @@ class MainActivity : AppCompatActivity() {
 //        )
 
 //
-//        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-//
-//            override fun onPageSelected(position: Int) {
-//                super.onPageSelected(position)
-//                tabLayout.getTabAt(position)?.select()
-//            }
-//        })
+        viewPager2.adapter = ViewPager2Adapter(this)
+        TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
+            tab.text = "OBJECT ${(position + 1)}"
+        }.attach()
 
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.container, MusicListFragment())
-            .addToBackStack("RecipeList")  //положила в стек
-            .commit()
+//        supportFragmentManager
+//            .beginTransaction()
+//            .replace(R.id.container, ComplexSearchFragment())
+//            .addToBackStack("RecipeList")  //положила в стек
+//            .commit()
 
     }
 }
