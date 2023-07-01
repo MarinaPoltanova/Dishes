@@ -30,9 +30,7 @@ class DetailRecipeViewModel(
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(getDetailRecipeObserverRx())
             }
-//    }
 
-//    }
 
     private fun getDetailRecipeObserverRx(): SingleObserver<RecipeInfo> {
         return object : SingleObserver<RecipeInfo> {
